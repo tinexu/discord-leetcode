@@ -1,0 +1,235 @@
+name: LeetDraw Discord Ping
+
+# Posts a random LeetCode problem to a Discord channel on a schedule, via an
+# incoming webhook. No bot, no server needed - runs entirely on GitHub's free
+# Actions runners, so it keeps firing even if nothing else is online.
+#
+# Setup (one time):
+#   1. Create (or reuse) any GitHub repo - it can be empty and private.
+#   2. Add this file at: .github/workflows/leetcode-discord.yml
+#   3. In the repo: Settings -> Secrets and variables -> Actions -> New repository secret
+#        Name:  DISCORD_WEBHOOK_URL
+#        Value: your Discord channel's webhook URL
+#   4. Commit. That's it - it fires on the schedule below, and you can also
+#      trigger it manually any time from the repo's Actions tab (this workflow's
+#      page -> "Run workflow") to test it right away.
+
+on:
+  schedule:
+    # 9:00 AM America/Indianapolis (Eastern), currently UTC-4 during daylight
+    # saving. The UTC offset shifts to -5 once DST ends (first Sunday in
+    # November) - change 13 to 14 then if you want it pinned to 9:00 AM local.
+    - cron: '0 13 * * *'
+  workflow_dispatch: {}   # lets you fire it on demand from the Actions tab, to test
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pick a random problem and post to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          python3 - << 'PYSCRIPT'
+          import json
+          import os
+          import random
+          import urllib.request
+
+          # (title, leetcode slug, difficulty) - same 160-problem set as the LeetDraw app
+          PROBLEMS = [
+              ('Two Sum', 'two-sum', 'E'),
+              ('Contains Duplicate', 'contains-duplicate', 'E'),
+              ('Valid Anagram', 'valid-anagram', 'E'),
+              ('Valid Palindrome', 'valid-palindrome', 'E'),
+              ('Best Time to Buy and Sell Stock', 'best-time-to-buy-and-sell-stock', 'E'),
+              ('Valid Parentheses', 'valid-parentheses', 'E'),
+              ('Binary Search', 'binary-search', 'E'),
+              ('Reverse Linked List', 'reverse-linked-list', 'E'),
+              ('Merge Two Sorted Lists', 'merge-two-sorted-lists', 'E'),
+              ('Linked List Cycle', 'linked-list-cycle', 'E'),
+              ('Invert Binary Tree', 'invert-binary-tree', 'E'),
+              ('Maximum Depth of Binary Tree', 'maximum-depth-of-binary-tree', 'E'),
+              ('Diameter of Binary Tree', 'diameter-of-binary-tree', 'E'),
+              ('Balanced Binary Tree', 'balanced-binary-tree', 'E'),
+              ('Same Tree', 'same-tree', 'E'),
+              ('Subtree of Another Tree', 'subtree-of-another-tree', 'E'),
+              ('Symmetric Tree', 'symmetric-tree', 'E'),
+              ('Path Sum', 'path-sum', 'E'),
+              ('Kth Largest Element in a Stream', 'kth-largest-element-in-a-stream', 'E'),
+              ('Last Stone Weight', 'last-stone-weight', 'E'),
+              ('Climbing Stairs', 'climbing-stairs', 'E'),
+              ('Min Cost Climbing Stairs', 'min-cost-climbing-stairs', 'E'),
+              ('Happy Number', 'happy-number', 'E'),
+              ('Plus One', 'plus-one', 'E'),
+              ('Single Number', 'single-number', 'E'),
+              ('Number of 1 Bits', 'number-of-1-bits', 'E'),
+              ('Counting Bits', 'counting-bits', 'E'),
+              ('Reverse Bits', 'reverse-bits', 'E'),
+              ('Missing Number', 'missing-number', 'E'),
+              ('Roman to Integer', 'roman-to-integer', 'E'),
+              ('Longest Common Prefix', 'longest-common-prefix', 'E'),
+              ('Find the Index of the First Occurrence in a String', 'find-the-index-of-the-first-occurrence-in-a-string', 'E'),
+              ('Majority Element', 'majority-element', 'E'),
+              ('Remove Duplicates from Sorted Array', 'remove-duplicates-from-sorted-array', 'E'),
+              ('Group Anagrams', 'group-anagrams', 'M'),
+              ('Top K Frequent Elements', 'top-k-frequent-elements', 'M'),
+              ('Product of Array Except Self', 'product-of-array-except-self', 'M'),
+              ('Valid Sudoku', 'valid-sudoku', 'M'),
+              ('Longest Consecutive Sequence', 'longest-consecutive-sequence', 'M'),
+              ('Two Sum II - Input Array Is Sorted', 'two-sum-ii-input-array-is-sorted', 'M'),
+              ('3Sum', '3sum', 'M'),
+              ('Container With Most Water', 'container-with-most-water', 'M'),
+              ('Longest Substring Without Repeating Characters', 'longest-substring-without-repeating-characters', 'M'),
+              ('Longest Repeating Character Replacement', 'longest-repeating-character-replacement', 'M'),
+              ('Permutation in String', 'permutation-in-string', 'M'),
+              ('Min Stack', 'min-stack', 'M'),
+              ('Evaluate Reverse Polish Notation', 'evaluate-reverse-polish-notation', 'M'),
+              ('Generate Parentheses', 'generate-parentheses', 'M'),
+              ('Daily Temperatures', 'daily-temperatures', 'M'),
+              ('Car Fleet', 'car-fleet', 'M'),
+              ('Search a 2D Matrix', 'search-a-2d-matrix', 'M'),
+              ('Koko Eating Bananas', 'koko-eating-bananas', 'M'),
+              ('Find Minimum in Rotated Sorted Array', 'find-minimum-in-rotated-sorted-array', 'M'),
+              ('Search in Rotated Sorted Array', 'search-in-rotated-sorted-array', 'M'),
+              ('Time Based Key-Value Store', 'time-based-key-value-store', 'M'),
+              ('Reorder List', 'reorder-list', 'M'),
+              ('Remove Nth Node From End of List', 'remove-nth-node-from-end-of-list', 'M'),
+              ('Copy List with Random Pointer', 'copy-list-with-random-pointer', 'M'),
+              ('Add Two Numbers', 'add-two-numbers', 'M'),
+              ('Find the Duplicate Number', 'find-the-duplicate-number', 'M'),
+              ('LRU Cache', 'lru-cache', 'M'),
+              ('Lowest Common Ancestor of a Binary Search Tree', 'lowest-common-ancestor-of-a-binary-search-tree', 'M'),
+              ('Binary Tree Level Order Traversal', 'binary-tree-level-order-traversal', 'M'),
+              ('Binary Tree Right Side View', 'binary-tree-right-side-view', 'M'),
+              ('Count Good Nodes in Binary Tree', 'count-good-nodes-in-binary-tree', 'M'),
+              ('Validate Binary Search Tree', 'validate-binary-search-tree', 'M'),
+              ('Kth Smallest Element in a BST', 'kth-smallest-element-in-a-bst', 'M'),
+              ('Construct Binary Tree from Preorder and Inorder Traversal', 'construct-binary-tree-from-preorder-and-inorder-traversal', 'M'),
+              ('Flatten Binary Tree to Linked List', 'flatten-binary-tree-to-linked-list', 'M'),
+              ('Populating Next Right Pointers in Each Node', 'populating-next-right-pointers-in-each-node', 'M'),
+              ('Implement Trie (Prefix Tree)', 'implement-trie-prefix-tree', 'M'),
+              ('Design Add and Search Words Data Structure', 'design-add-and-search-words-data-structure', 'M'),
+              ('K Closest Points to Origin', 'k-closest-points-to-origin', 'M'),
+              ('Kth Largest Element in an Array', 'kth-largest-element-in-an-array', 'M'),
+              ('Task Scheduler', 'task-scheduler', 'M'),
+              ('Design Twitter', 'design-twitter', 'M'),
+              ('Subsets', 'subsets', 'M'),
+              ('Combination Sum', 'combination-sum', 'M'),
+              ('Permutations', 'permutations', 'M'),
+              ('Subsets II', 'subsets-ii', 'M'),
+              ('Combination Sum II', 'combination-sum-ii', 'M'),
+              ('Word Search', 'word-search', 'M'),
+              ('Palindrome Partitioning', 'palindrome-partitioning', 'M'),
+              ('Letter Combinations of a Phone Number', 'letter-combinations-of-a-phone-number', 'M'),
+              ('Number of Islands', 'number-of-islands', 'M'),
+              ('Clone Graph', 'clone-graph', 'M'),
+              ('Max Area of Island', 'max-area-of-island', 'M'),
+              ('Pacific Atlantic Water Flow', 'pacific-atlantic-water-flow', 'M'),
+              ('Surrounded Regions', 'surrounded-regions', 'M'),
+              ('Rotting Oranges', 'rotting-oranges', 'M'),
+              ('01 Matrix', '01-matrix', 'M'),
+              ('Course Schedule', 'course-schedule', 'M'),
+              ('Course Schedule II', 'course-schedule-ii', 'M'),
+              ('Redundant Connection', 'redundant-connection', 'M'),
+              ('Accounts Merge', 'accounts-merge', 'M'),
+              ('Evaluate Division', 'evaluate-division', 'M'),
+              ('Min Cost to Connect All Points', 'min-cost-to-connect-all-points', 'M'),
+              ('Network Delay Time', 'network-delay-time', 'M'),
+              ('Cheapest Flights Within K Stops', 'cheapest-flights-within-k-stops', 'M'),
+              ('House Robber', 'house-robber', 'M'),
+              ('House Robber II', 'house-robber-ii', 'M'),
+              ('Longest Palindromic Substring', 'longest-palindromic-substring', 'M'),
+              ('Palindromic Substrings', 'palindromic-substrings', 'M'),
+              ('Decode Ways', 'decode-ways', 'M'),
+              ('Coin Change', 'coin-change', 'M'),
+              ('Maximum Product Subarray', 'maximum-product-subarray', 'M'),
+              ('Word Break', 'word-break', 'M'),
+              ('Longest Increasing Subsequence', 'longest-increasing-subsequence', 'M'),
+              ('Partition Equal Subset Sum', 'partition-equal-subset-sum', 'M'),
+              ('Unique Paths', 'unique-paths', 'M'),
+              ('Longest Common Subsequence', 'longest-common-subsequence', 'M'),
+              ('Best Time to Buy and Sell Stock with Cooldown', 'best-time-to-buy-and-sell-stock-with-cooldown', 'M'),
+              ('Coin Change II', 'coin-change-ii', 'M'),
+              ('Target Sum', 'target-sum', 'M'),
+              ('Interleaving String', 'interleaving-string', 'M'),
+              ('Edit Distance', 'edit-distance', 'M'),
+              ('Maximum Subarray', 'maximum-subarray', 'M'),
+              ('Jump Game', 'jump-game', 'M'),
+              ('Jump Game II', 'jump-game-ii', 'M'),
+              ('Gas Station', 'gas-station', 'M'),
+              ('Hand of Straights', 'hand-of-straights', 'M'),
+              ('Merge Triplets to Form Target Triplet', 'merge-triplets-to-form-target-triplet', 'M'),
+              ('Partition Labels', 'partition-labels', 'M'),
+              ('Valid Parenthesis String', 'valid-parenthesis-string', 'M'),
+              ('Insert Interval', 'insert-interval', 'M'),
+              ('Merge Intervals', 'merge-intervals', 'M'),
+              ('Non-overlapping Intervals', 'non-overlapping-intervals', 'M'),
+              ('Minimum Number of Arrows to Burst Balloons', 'minimum-number-of-arrows-to-burst-balloons', 'M'),
+              ('Car Pooling', 'car-pooling', 'M'),
+              ('Rotate Image', 'rotate-image', 'M'),
+              ('Spiral Matrix', 'spiral-matrix', 'M'),
+              ('Set Matrix Zeroes', 'set-matrix-zeroes', 'M'),
+              ('Pow(x, n)', 'powx-n', 'M'),
+              ('Multiply Strings', 'multiply-strings', 'M'),
+              ('Detect Squares', 'detect-squares', 'M'),
+              ('Sum of Two Integers', 'sum-of-two-integers', 'M'),
+              ('Reverse Integer', 'reverse-integer', 'M'),
+              ('Integer to Roman', 'integer-to-roman', 'M'),
+              ('Zigzag Conversion', 'zigzag-conversion', 'M'),
+              ('String to Integer (atoi)', 'string-to-integer-atoi', 'M'),
+              ('Rotate Array', 'rotate-array', 'M'),
+              ('Sort Colors', 'sort-colors', 'M'),
+              ('Trapping Rain Water', 'trapping-rain-water', 'H'),
+              ('Minimum Window Substring', 'minimum-window-substring', 'H'),
+              ('Sliding Window Maximum', 'sliding-window-maximum', 'H'),
+              ('Largest Rectangle in Histogram', 'largest-rectangle-in-histogram', 'H'),
+              ('Median of Two Sorted Arrays', 'median-of-two-sorted-arrays', 'H'),
+              ('Merge k Sorted Lists', 'merge-k-sorted-lists', 'H'),
+              ('Reverse Nodes in k-Group', 'reverse-nodes-in-k-group', 'H'),
+              ('Binary Tree Maximum Path Sum', 'binary-tree-maximum-path-sum', 'H'),
+              ('Serialize and Deserialize Binary Tree', 'serialize-and-deserialize-binary-tree', 'H'),
+              ('Word Search II', 'word-search-ii', 'H'),
+              ('Find Median from Data Stream', 'find-median-from-data-stream', 'H'),
+              ('N-Queens', 'n-queens', 'H'),
+              ('Word Ladder', 'word-ladder', 'H'),
+              ('Reconstruct Itinerary', 'reconstruct-itinerary', 'H'),
+              ('Swim in Rising Water', 'swim-in-rising-water', 'H'),
+              ('Distinct Subsequences', 'distinct-subsequences', 'H'),
+              ('Regular Expression Matching', 'regular-expression-matching', 'H'),
+              ('Burst Balloons', 'burst-balloons', 'H'),
+          ]
+
+          DIFF_INFO = {
+              "E": ("Easy", 0x1f8f5f),
+              "M": ("Medium", 0xb9760f),
+              "H": ("Hard", 0xc93f3f),
+          }
+
+          title, slug, diff = random.choice(PROBLEMS)
+          diff_word, color = DIFF_INFO[diff]
+          problem_url = f"https://leetcode.com/problems/{slug}/"
+
+          payload = {
+              "content": "@here \U0001F3B2 **Today's LeetCode pick is up!**",
+              "allowed_mentions": {"parse": ["everyone"]},
+              "embeds": [
+                  {
+                      "title": title,
+                      "url": problem_url,
+                      "description": f"Difficulty: **{diff_word}**",
+                      "color": color,
+                  }
+              ],
+          }
+
+          webhook_url = os.environ["DISCORD_WEBHOOK_URL"]
+          req = urllib.request.Request(
+              webhook_url,
+              data=json.dumps(payload).encode("utf-8"),
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+          with urllib.request.urlopen(req) as resp:
+              print("Discord responded:", resp.status)
+          PYSCRIPT
