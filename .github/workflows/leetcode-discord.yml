@@ -227,7 +227,12 @@ jobs:
           req = urllib.request.Request(
               webhook_url,
               data=json.dumps(payload).encode("utf-8"),
-              headers={"Content-Type": "application/json"},
+              headers={
+                  "Content-Type": "application/json",
+                  # Discord (behind Cloudflare) rejects urllib's default
+                  # "Python-urllib/x.y" User-Agent with a 403 — send a real one.
+                  "User-Agent": "LeetDrawBot/1.0 (+https://github.com)",
+              },
               method="POST",
           )
           with urllib.request.urlopen(req) as resp:
