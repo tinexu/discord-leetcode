@@ -16,10 +16,11 @@ name: LeetDraw Discord Ping
 
 on:
   schedule:
-    # 9:00 AM America/Indianapolis (Eastern), currently UTC-4 during daylight
-    # saving. The UTC offset shifts to -5 once DST ends (first Sunday in
-    # November) - change 13 to 14 then if you want it pinned to 9:00 AM local.
-    - cron: '0 13 * * *'
+    # Every hour, on the hour, from 9:00 AM to 5:00 PM America/Indianapolis
+    # (Eastern) inclusive - 9 pings/day. Written in UTC (13-21) for the
+    # current UTC-4 daylight-saving offset; shift both numbers to 14-22 once
+    # DST ends (first Sunday in November) to keep it pinned to 9-5 local.
+    - cron: '0 13-21 * * *'
   workflow_dispatch: {}   # lets you fire it on demand from the Actions tab, to test
 
 jobs:
