@@ -208,7 +208,22 @@ jobs:
               "H": ("Hard", 0xc93f3f),
           }
 
-          title, slug, diff = random.choice(PROBLEMS)
+          # Prioritize Medium/Hard over Easy: pick a difficulty TIER first with
+          # these weights, then pick uniformly within that tier. Weighting the
+          # tier (rather than each problem) keeps this independent of how many
+          # problems are actually in each tier (108 Medium vs. just 18 Hard) -
+          # without this, Hard would rarely come up simply because it's the
+          # smallest group. Tune the numbers below to shift the mix.
+          TIER_WEIGHTS = {"E": 15, "M": 45, "H": 40}
+          by_diff = {}
+          for p in PROBLEMS:
+              by_diff.setdefault(p[2], []).append(p)
+
+          diff = random.choices(
+              list(TIER_WEIGHTS.keys()),
+              weights=list(TIER_WEIGHTS.values()),
+          )[0]
+          title, slug, diff = random.choice(by_diff[diff])
           diff_word, color = DIFF_INFO[diff]
           problem_url = f"https://leetcode.com/problems/{slug}/"
 
