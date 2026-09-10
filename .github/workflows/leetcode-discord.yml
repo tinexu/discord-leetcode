@@ -13,6 +13,13 @@ name: LeetDraw Discord Ping
 #   4. Commit. That's it - it fires on the schedule below, and you can also
 #      trigger it manually any time from the repo's Actions tab (this workflow's
 #      page -> "Run workflow") to test it right away.
+#
+# No-repeat tracking needs the workflow to push a small state file
+# (.github/leetdraw-seen.json) back to the repo after each run - that's what
+# `permissions: contents: write` and the final "Persist" step below are for.
+# This only works if pushes straight to the default branch are allowed (no
+# required-review branch protection on it); a brand-new/personal repo is
+# fine by default.
 
 on:
   schedule:
@@ -24,10 +31,16 @@ on:
     - cron: '0 13-21/2 * * *'
   workflow_dispatch: {}   # lets you fire it on demand from the Actions tab, to test
 
+permissions:
+  contents: write   # lets this workflow commit the no-repeat state file back to the repo
+
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
       - name: Pick a random problem and post to Discord
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -37,6 +50,8 @@ jobs:
           import os
           import random
           import urllib.request
+
+          STATE_PATH = ".github/leetdraw-seen.json"
 
           # (title, leetcode slug, difficulty) - same 160-problem set as the LeetDraw app
           PROBLEMS = [
@@ -208,22 +223,38 @@ jobs:
               "H": ("Hard", 0xc93f3f),
           }
 
-          # Prioritize Medium/Hard over Easy: pick a difficulty TIER first with
-          # these weights, then pick uniformly within that tier. Weighting the
-          # tier (rather than each problem) keeps this independent of how many
-          # problems are actually in each tier (108 Medium vs. just 18 Hard) -
-          # without this, Hard would rarely come up simply because it's the
-          # smallest group. Tune the numbers below to shift the mix.
+          # Prioritize Medium/Hard over Easy: pick a difficulty TIER first with these
+          # weights, then pick uniformly within that tier (not weighted per-problem) -
+          # that keeps it independent of how many problems are actually in each tier
+          # (108 Medium vs. just 18 Hard). Tune these to shift the mix.
           TIER_WEIGHTS = {"E": 15, "M": 45, "H": 40}
+
+          # No-repeat tracking: "seen" holds the slugs already sent in the current
+          # cycle. It's read from - and written back to - a small JSON file that this
+          # workflow commits to the repo after every run, so it persists across the
+          # fresh VM each scheduled run gets. Once every problem in the 160-set has
+          # been sent, the cycle resets and repeats become possible again.
+          try:
+              with open(STATE_PATH) as f:
+                  seen = set(json.load(f).get("seen", []))
+          except FileNotFoundError:
+              seen = set()
+
+          if len(seen) >= len(PROBLEMS):
+              seen = set()  # full cycle just completed - start a fresh one
+
           by_diff = {}
           for p in PROBLEMS:
-              by_diff.setdefault(p[2], []).append(p)
+              if p[1] not in seen:
+                  by_diff.setdefault(p[2], []).append(p)
 
-          diff = random.choices(
-              list(TIER_WEIGHTS.keys()),
-              weights=list(TIER_WEIGHTS.values()),
-          )[0]
-          title, slug, diff = random.choice(by_diff[diff])
+          # A tier can run dry before the cycle does (Hard has only 18 problems but a
+          # 40% weight, so it empties out well before 160 total sends) - fall back to
+          # whichever tiers still have unseen problems left.
+          available_tiers = [d for d in TIER_WEIGHTS if by_diff.get(d)]
+          weights = [TIER_WEIGHTS[d] for d in available_tiers]
+          tier = random.choices(available_tiers, weights=weights)[0]
+          title, slug, diff = random.choice(by_diff[tier])
           diff_word, color = DIFF_INFO[diff]
           problem_url = f"https://leetcode.com/problems/{slug}/"
 
@@ -247,11 +278,28 @@ jobs:
               headers={
                   "Content-Type": "application/json",
                   # Discord (behind Cloudflare) rejects urllib's default
-                  # "Python-urllib/x.y" User-Agent with a 403 — send a real one.
+                  # "Python-urllib/x.y" User-Agent with a 403 - send a real one.
                   "User-Agent": "LeetDrawBot/1.0 (+https://github.com)",
               },
               method="POST",
           )
           with urllib.request.urlopen(req) as resp:
               print("Discord responded:", resp.status)
+
+          # Only mark it seen once the post actually succeeded, so a failed send
+          # doesn't burn a slot in the cycle.
+          seen.add(slug)
+          os.makedirs(os.path.dirname(STATE_PATH), exist_ok=True)
+          with open(STATE_PATH, "w") as f:
+              json.dump({"seen": sorted(seen)}, f, indent=2)
+              f.write("\n")
+          print(f"Sent: {title} ({diff_word}). Cycle progress: {len(seen)}/{len(PROBLEMS)}.")
           PYSCRIPT
+
+      - name: Persist no-repeat state back to the repo
+        run: |
+          git config user.name "leetdraw-bot"
+          git config user.email "leetdraw-bot@users.noreply.github.com"
+          git add .github/leetdraw-seen.json
+          git diff --cached --quiet || git commit -m "LeetDraw: update seen-list"
+          git push
