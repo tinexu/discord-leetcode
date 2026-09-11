@@ -2,6 +2,7 @@
   "seen": [
     "kth-largest-element-in-an-array",
     "median-of-two-sorted-arrays",
-    "serialize-and-deserialize-binary-tree"
+    "serialize-and-deserialize-binary-tree",
+    "sort-colors"
   ]
 }
