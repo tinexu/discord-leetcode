@@ -1,5 +1,6 @@
 {
   "seen": [
+    "kth-largest-element-in-an-array",
     "serialize-and-deserialize-binary-tree"
   ]
 }
