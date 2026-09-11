@@ -3,6 +3,7 @@
     "find-median-from-data-stream",
     "kth-largest-element-in-an-array",
     "median-of-two-sorted-arrays",
+    "remove-nth-node-from-end-of-list",
     "serialize-and-deserialize-binary-tree",
     "sort-colors"
   ]
