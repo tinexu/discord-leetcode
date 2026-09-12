@@ -1,5 +1,6 @@
 {
   "seen": [
+    "distinct-subsequences",
     "find-median-from-data-stream",
     "kth-largest-element-in-an-array",
     "median-of-two-sorted-arrays",
