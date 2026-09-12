@@ -7,6 +7,7 @@
     "n-queens",
     "remove-nth-node-from-end-of-list",
     "serialize-and-deserialize-binary-tree",
-    "sort-colors"
+    "sort-colors",
+    "validate-binary-search-tree"
   ]
 }
