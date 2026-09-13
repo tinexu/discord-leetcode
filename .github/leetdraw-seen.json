@@ -1,5 +1,6 @@
 {
   "seen": [
+    "detect-squares",
     "distinct-subsequences",
     "find-median-from-data-stream",
     "gas-station",
