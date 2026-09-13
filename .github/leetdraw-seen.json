@@ -13,6 +13,7 @@
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
     "sort-colors",
-    "validate-binary-search-tree"
+    "validate-binary-search-tree",
+    "word-ladder"
   ]
 }
