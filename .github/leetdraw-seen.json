@@ -2,6 +2,7 @@
   "seen": [
     "3sum",
     "balanced-binary-tree",
+    "binary-tree-maximum-path-sum",
     "detect-squares",
     "distinct-subsequences",
     "find-median-from-data-stream",
