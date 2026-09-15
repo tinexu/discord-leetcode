@@ -1,5 +1,6 @@
 {
   "seen": [
+    "3sum",
     "balanced-binary-tree",
     "detect-squares",
     "distinct-subsequences",
