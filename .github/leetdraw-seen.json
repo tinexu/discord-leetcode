@@ -1,5 +1,6 @@
 {
   "seen": [
+    "balanced-binary-tree",
     "detect-squares",
     "distinct-subsequences",
     "find-median-from-data-stream",
