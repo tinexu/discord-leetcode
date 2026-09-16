@@ -28,6 +28,7 @@
     "valid-parenthesis-string",
     "validate-binary-search-tree",
     "word-ladder",
-    "word-search-ii"
+    "word-search-ii",
+    "zigzag-conversion"
   ]
 }
