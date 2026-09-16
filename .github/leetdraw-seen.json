@@ -26,6 +26,7 @@
     "two-sum",
     "valid-parenthesis-string",
     "validate-binary-search-tree",
-    "word-ladder"
+    "word-ladder",
+    "word-search-ii"
   ]
 }
