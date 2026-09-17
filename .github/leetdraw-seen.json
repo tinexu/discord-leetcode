@@ -24,6 +24,7 @@
     "reconstruct-itinerary",
     "regular-expression-matching",
     "remove-nth-node-from-end-of-list",
+    "reverse-nodes-in-k-group",
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
