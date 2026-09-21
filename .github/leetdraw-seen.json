@@ -43,6 +43,7 @@
     "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
     "sort-colors",
+    "subtree-of-another-tree",
     "swim-in-rising-water",
     "top-k-frequent-elements",
     "trapping-rain-water",
