@@ -43,6 +43,7 @@
     "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
     "sort-colors",
+    "spiral-matrix",
     "subtree-of-another-tree",
     "swim-in-rising-water",
     "top-k-frequent-elements",
