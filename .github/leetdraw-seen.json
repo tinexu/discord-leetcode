@@ -52,6 +52,7 @@
     "valid-parenthesis-string",
     "validate-binary-search-tree",
     "word-ladder",
+    "word-search",
     "word-search-ii",
     "zigzag-conversion"
   ]
