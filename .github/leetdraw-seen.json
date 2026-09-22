@@ -28,6 +28,7 @@
     "median-of-two-sorted-arrays",
     "merge-k-sorted-lists",
     "merge-triplets-to-form-target-triplet",
+    "min-cost-climbing-stairs",
     "minimum-number-of-arrows-to-burst-balloons",
     "minimum-window-substring",
     "missing-number",
