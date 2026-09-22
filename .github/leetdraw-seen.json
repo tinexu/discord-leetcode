@@ -24,6 +24,7 @@
     "kth-largest-element-in-an-array",
     "largest-rectangle-in-histogram",
     "longest-substring-without-repeating-characters",
+    "majority-element",
     "maximum-depth-of-binary-tree",
     "median-of-two-sorted-arrays",
     "merge-k-sorted-lists",
