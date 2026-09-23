@@ -1,6 +1,7 @@
 {
   "seen": [
     "3sum",
+    "accounts-merge",
     "balanced-binary-tree",
     "binary-tree-maximum-path-sum",
     "burst-balloons",
