@@ -49,6 +49,7 @@
     "regular-expression-matching",
     "remove-duplicates-from-sorted-array",
     "remove-nth-node-from-end-of-list",
+    "reverse-bits",
     "reverse-nodes-in-k-group",
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
