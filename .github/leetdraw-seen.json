@@ -39,6 +39,7 @@
     "linked-list-cycle",
     "longest-common-prefix",
     "longest-common-subsequence",
+    "longest-consecutive-sequence",
     "longest-substring-without-repeating-characters",
     "lru-cache",
     "majority-element",
