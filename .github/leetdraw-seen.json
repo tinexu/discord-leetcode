@@ -39,6 +39,7 @@
     "longest-common-prefix",
     "longest-common-subsequence",
     "longest-substring-without-repeating-characters",
+    "lru-cache",
     "majority-element",
     "maximum-depth-of-binary-tree",
     "maximum-product-subarray",
