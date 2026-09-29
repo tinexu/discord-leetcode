@@ -70,6 +70,7 @@
     "remove-nth-node-from-end-of-list",
     "reverse-bits",
     "reverse-nodes-in-k-group",
+    "roman-to-integer",
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
