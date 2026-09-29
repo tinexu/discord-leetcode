@@ -49,6 +49,7 @@
     "maximum-depth-of-binary-tree",
     "maximum-product-subarray",
     "median-of-two-sorted-arrays",
+    "merge-intervals",
     "merge-k-sorted-lists",
     "merge-triplets-to-form-target-triplet",
     "min-cost-climbing-stairs",
