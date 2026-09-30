@@ -55,6 +55,7 @@
     "merge-intervals",
     "merge-k-sorted-lists",
     "merge-triplets-to-form-target-triplet",
+    "merge-two-sorted-lists",
     "min-cost-climbing-stairs",
     "minimum-number-of-arrows-to-burst-balloons",
     "minimum-window-substring",
