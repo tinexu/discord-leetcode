@@ -73,6 +73,7 @@
     "remove-duplicates-from-sorted-array",
     "remove-nth-node-from-end-of-list",
     "reverse-bits",
+    "reverse-linked-list",
     "reverse-nodes-in-k-group",
     "roman-to-integer",
     "search-in-rotated-sorted-array",
