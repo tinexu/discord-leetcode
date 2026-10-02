@@ -102,6 +102,7 @@
     "valid-palindrome",
     "valid-parentheses",
     "valid-parenthesis-string",
+    "valid-sudoku",
     "validate-binary-search-tree",
     "word-break",
     "word-ladder",
