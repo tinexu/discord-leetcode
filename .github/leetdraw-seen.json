@@ -55,6 +55,7 @@
     "longest-substring-without-repeating-characters",
     "lru-cache",
     "majority-element",
+    "max-area-of-island",
     "maximum-depth-of-binary-tree",
     "maximum-product-subarray",
     "median-of-two-sorted-arrays",
