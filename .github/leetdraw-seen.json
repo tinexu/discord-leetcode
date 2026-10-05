@@ -29,6 +29,7 @@
     "detect-squares",
     "distinct-subsequences",
     "edit-distance",
+    "evaluate-division",
     "evaluate-reverse-polish-notation",
     "find-median-from-data-stream",
     "find-minimum-in-rotated-sorted-array",
