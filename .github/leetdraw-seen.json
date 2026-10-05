@@ -66,6 +66,7 @@
     "merge-triplets-to-form-target-triplet",
     "merge-two-sorted-lists",
     "min-cost-climbing-stairs",
+    "min-stack",
     "minimum-number-of-arrows-to-burst-balloons",
     "minimum-window-substring",
     "missing-number",
