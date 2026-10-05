@@ -32,6 +32,7 @@
     "evaluate-reverse-polish-notation",
     "find-median-from-data-stream",
     "find-minimum-in-rotated-sorted-array",
+    "find-the-duplicate-number",
     "find-the-index-of-the-first-occurrence-in-a-string",
     "flatten-binary-tree-to-linked-list",
     "gas-station",
