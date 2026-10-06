@@ -45,6 +45,7 @@
     "insert-interval",
     "integer-to-roman",
     "interleaving-string",
+    "invert-binary-tree",
     "jump-game",
     "jump-game-ii",
     "k-closest-points-to-origin",
