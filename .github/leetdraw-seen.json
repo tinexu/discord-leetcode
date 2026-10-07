@@ -103,6 +103,7 @@
     "reverse-nodes-in-k-group",
     "roman-to-integer",
     "rotting-oranges",
+    "same-tree",
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
     "set-matrix-zeroes",
