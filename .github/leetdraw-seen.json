@@ -99,6 +99,7 @@
     "remove-nth-node-from-end-of-list",
     "reorder-list",
     "reverse-bits",
+    "reverse-integer",
     "reverse-linked-list",
     "reverse-nodes-in-k-group",
     "roman-to-integer",
