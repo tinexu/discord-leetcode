@@ -60,6 +60,7 @@
     "longest-common-prefix",
     "longest-common-subsequence",
     "longest-consecutive-sequence",
+    "longest-repeating-character-replacement",
     "longest-substring-without-repeating-characters",
     "lru-cache",
     "majority-element",
