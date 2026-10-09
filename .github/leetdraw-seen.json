@@ -64,6 +64,7 @@
     "longest-consecutive-sequence",
     "longest-repeating-character-replacement",
     "longest-substring-without-repeating-characters",
+    "lowest-common-ancestor-of-a-binary-search-tree",
     "lru-cache",
     "majority-element",
     "max-area-of-island",
