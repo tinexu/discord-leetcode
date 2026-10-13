@@ -1,6 +1,7 @@
 {
   "seen": [
     "3sum",
+    "binary-tree-level-order-traversal",
     "number-of-islands",
     "regular-expression-matching",
     "sort-colors"
