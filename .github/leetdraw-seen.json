@@ -2,6 +2,7 @@
   "seen": [
     "3sum",
     "binary-tree-level-order-traversal",
+    "merge-intervals",
     "number-of-islands",
     "powx-n",
     "regular-expression-matching",
