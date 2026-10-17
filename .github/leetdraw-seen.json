@@ -1,6 +1,7 @@
 {
   "seen": [
     "3sum",
+    "binary-search",
     "binary-tree-level-order-traversal",
     "burst-balloons",
     "climbing-stairs",
