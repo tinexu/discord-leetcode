@@ -24,6 +24,7 @@
     "remove-duplicates-from-sorted-array",
     "reverse-nodes-in-k-group",
     "same-tree",
+    "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
     "sort-colors",
     "subsets",
