@@ -8,6 +8,7 @@
     "decode-ways",
     "detect-squares",
     "evaluate-reverse-polish-notation",
+    "find-median-from-data-stream",
     "house-robber",
     "invert-binary-tree",
     "largest-rectangle-in-histogram",
