@@ -48,6 +48,7 @@
     "target-sum",
     "trapping-rain-water",
     "word-ladder",
+    "word-search",
     "word-search-ii"
   ]
 }
