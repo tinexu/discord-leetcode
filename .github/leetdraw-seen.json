@@ -24,6 +24,7 @@
     "merge-intervals",
     "merge-k-sorted-lists",
     "min-cost-climbing-stairs",
+    "min-cost-to-connect-all-points",
     "minimum-window-substring",
     "n-queens",
     "number-of-islands",
