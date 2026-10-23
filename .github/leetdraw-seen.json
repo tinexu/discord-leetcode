@@ -42,6 +42,7 @@
     "remove-nth-node-from-end-of-list",
     "reverse-linked-list",
     "reverse-nodes-in-k-group",
+    "rotting-oranges",
     "same-tree",
     "serialize-and-deserialize-binary-tree",
     "sliding-window-maximum",
