@@ -52,6 +52,7 @@
     "sort-colors",
     "subsets",
     "subtree-of-another-tree",
+    "surrounded-regions",
     "swim-in-rising-water",
     "target-sum",
     "time-based-key-value-store",
