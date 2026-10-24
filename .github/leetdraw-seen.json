@@ -15,6 +15,7 @@
     "distinct-subsequences",
     "evaluate-reverse-polish-notation",
     "find-median-from-data-stream",
+    "find-minimum-in-rotated-sorted-array",
     "house-robber",
     "integer-to-roman",
     "invert-binary-tree",
