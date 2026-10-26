@@ -39,6 +39,7 @@
     "number-of-islands",
     "palindrome-partitioning",
     "palindromic-substrings",
+    "partition-equal-subset-sum",
     "partition-labels",
     "path-sum",
     "permutations",
