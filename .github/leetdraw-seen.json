@@ -2,6 +2,7 @@
   "seen": [
     "3sum",
     "add-two-numbers",
+    "balanced-binary-tree",
     "binary-search",
     "binary-tree-level-order-traversal",
     "binary-tree-maximum-path-sum",
