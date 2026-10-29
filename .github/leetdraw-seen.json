@@ -24,6 +24,7 @@
     "find-median-from-data-stream",
     "find-minimum-in-rotated-sorted-array",
     "flatten-binary-tree-to-linked-list",
+    "group-anagrams",
     "house-robber",
     "house-robber-ii",
     "integer-to-roman",
