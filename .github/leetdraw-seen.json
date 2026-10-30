@@ -48,6 +48,7 @@
     "median-of-two-sorted-arrays",
     "merge-intervals",
     "merge-k-sorted-lists",
+    "merge-two-sorted-lists",
     "min-cost-climbing-stairs",
     "min-cost-to-connect-all-points",
     "minimum-window-substring",
