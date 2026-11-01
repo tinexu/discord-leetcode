@@ -82,6 +82,7 @@
     "same-tree",
     "search-in-rotated-sorted-array",
     "serialize-and-deserialize-binary-tree",
+    "single-number",
     "sliding-window-maximum",
     "sort-colors",
     "subsets",
