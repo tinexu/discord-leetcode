@@ -57,6 +57,7 @@
     "longest-common-prefix",
     "longest-common-subsequence",
     "longest-increasing-subsequence",
+    "longest-palindromic-substring",
     "longest-repeating-character-replacement",
     "longest-substring-without-repeating-characters",
     "lowest-common-ancestor-of-a-binary-search-tree",
