@@ -124,6 +124,7 @@
     "symmetric-tree",
     "target-sum",
     "time-based-key-value-store",
+    "top-k-frequent-elements",
     "trapping-rain-water",
     "two-sum",
     "valid-anagram",
