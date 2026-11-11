@@ -146,6 +146,7 @@
     "word-break",
     "word-ladder",
     "word-search",
-    "word-search-ii"
+    "word-search-ii",
+    "zigzag-conversion"
   ]
 }
