@@ -98,6 +98,7 @@
     "partition-equal-subset-sum",
     "partition-labels",
     "path-sum",
+    "permutation-in-string",
     "permutations",
     "plus-one",
     "populating-next-right-pointers-in-each-node",
