@@ -69,6 +69,7 @@
     "linked-list-cycle",
     "longest-common-prefix",
     "longest-common-subsequence",
+    "longest-consecutive-sequence",
     "longest-increasing-subsequence",
     "longest-palindromic-substring",
     "longest-repeating-character-replacement",
