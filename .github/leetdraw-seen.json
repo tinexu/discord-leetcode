@@ -1,5 +1,6 @@
 {
   "seen": [
+    "best-time-to-buy-and-sell-stock",
     "distinct-subsequences",
     "median-of-two-sorted-arrays",
     "word-break"
