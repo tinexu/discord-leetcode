@@ -1,5 +1,6 @@
 {
   "seen": [
-    "distinct-subsequences"
+    "distinct-subsequences",
+    "median-of-two-sorted-arrays"
   ]
 }
