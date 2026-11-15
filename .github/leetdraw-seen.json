@@ -1,6 +1,7 @@
 {
   "seen": [
     "best-time-to-buy-and-sell-stock",
+    "binary-tree-maximum-path-sum",
     "distinct-subsequences",
     "median-of-two-sorted-arrays",
     "n-queens",
