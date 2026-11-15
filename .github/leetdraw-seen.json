@@ -6,6 +6,7 @@
     "median-of-two-sorted-arrays",
     "n-queens",
     "reverse-nodes-in-k-group",
+    "surrounded-regions",
     "word-break"
   ]
 }
