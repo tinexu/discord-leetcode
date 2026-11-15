@@ -7,6 +7,7 @@
     "n-queens",
     "reconstruct-itinerary",
     "reverse-nodes-in-k-group",
+    "serialize-and-deserialize-binary-tree",
     "surrounded-regions",
     "word-break"
   ]
