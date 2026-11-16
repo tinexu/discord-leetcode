@@ -11,6 +11,7 @@
     "reconstruct-itinerary",
     "reverse-nodes-in-k-group",
     "serialize-and-deserialize-binary-tree",
+    "subsets",
     "surrounded-regions",
     "word-break"
   ]
