@@ -10,6 +10,7 @@
     "interleaving-string",
     "maximum-subarray",
     "median-of-two-sorted-arrays",
+    "merge-k-sorted-lists",
     "n-queens",
     "reconstruct-itinerary",
     "reverse-nodes-in-k-group",
