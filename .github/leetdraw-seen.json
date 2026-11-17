@@ -16,6 +16,7 @@
     "serialize-and-deserialize-binary-tree",
     "subsets",
     "surrounded-regions",
+    "two-sum",
     "word-break"
   ]
 }
