@@ -14,6 +14,7 @@
     "maximum-subarray",
     "median-of-two-sorted-arrays",
     "merge-k-sorted-lists",
+    "minimum-window-substring",
     "n-queens",
     "reconstruct-itinerary",
     "regular-expression-matching",
