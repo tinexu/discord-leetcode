@@ -24,6 +24,7 @@
     "subsets",
     "surrounded-regions",
     "two-sum",
-    "word-break"
+    "word-break",
+    "word-search-ii"
   ]
 }
