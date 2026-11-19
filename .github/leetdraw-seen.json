@@ -16,6 +16,7 @@
     "merge-k-sorted-lists",
     "minimum-window-substring",
     "n-queens",
+    "palindrome-partitioning",
     "reconstruct-itinerary",
     "regular-expression-matching",
     "reverse-nodes-in-k-group",
