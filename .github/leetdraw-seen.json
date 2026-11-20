@@ -29,6 +29,7 @@
     "subsets",
     "surrounded-regions",
     "swim-in-rising-water",
+    "trapping-rain-water",
     "two-sum",
     "word-break",
     "word-search-ii"
