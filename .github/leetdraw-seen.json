@@ -42,6 +42,7 @@
     "two-sum",
     "word-break",
     "word-ladder",
-    "word-search-ii"
+    "word-search-ii",
+    "zigzag-conversion"
   ]
 }
