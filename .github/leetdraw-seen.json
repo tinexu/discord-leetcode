@@ -32,6 +32,7 @@
     "multiply-strings",
     "n-queens",
     "palindrome-partitioning",
+    "path-sum",
     "product-of-array-except-self",
     "reconstruct-itinerary",
     "regular-expression-matching",
