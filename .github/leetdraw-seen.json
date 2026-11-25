@@ -21,6 +21,7 @@
     "hand-of-straights",
     "implement-trie-prefix-tree",
     "interleaving-string",
+    "kth-largest-element-in-a-stream",
     "largest-rectangle-in-histogram",
     "last-stone-weight",
     "linked-list-cycle",
