@@ -39,6 +39,7 @@
     "n-queens",
     "palindrome-partitioning",
     "path-sum",
+    "permutation-in-string",
     "product-of-array-except-self",
     "reconstruct-itinerary",
     "regular-expression-matching",
