@@ -43,6 +43,7 @@
     "multiply-strings",
     "n-queens",
     "palindrome-partitioning",
+    "palindromic-substrings",
     "partition-equal-subset-sum",
     "path-sum",
     "permutation-in-string",
