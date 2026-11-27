@@ -29,6 +29,7 @@
     "last-stone-weight",
     "linked-list-cycle",
     "longest-increasing-subsequence",
+    "lru-cache",
     "majority-element",
     "max-area-of-island",
     "maximum-depth-of-binary-tree",
