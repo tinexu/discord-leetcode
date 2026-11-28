@@ -36,6 +36,7 @@
     "maximum-subarray",
     "median-of-two-sorted-arrays",
     "merge-k-sorted-lists",
+    "merge-two-sorted-lists",
     "min-cost-climbing-stairs",
     "minimum-number-of-arrows-to-burst-balloons",
     "minimum-window-substring",
